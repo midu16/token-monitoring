@@ -27,6 +27,7 @@ func (l *LogParser) Collect() error {
 	tokenType := "prompt" // placeholder
 
 	exporter.UpdateTokenUsage(l.name, tokenType, tokensUsed)
+	exporter.UpdateNLWP(l.name, float64(rand.Intn(10)+1))
 	fmt.Printf("[Collector: %s] Detected %f tokens used from log analysis\n", l.name, tokensUsed)
 
 	return nil

@@ -72,6 +72,20 @@
       "type": "timeseries"
     },
     {
+      "datasource": { "type": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 9 },
+      "id": 11,
+      "targets": [
+        {
+          "expr": "rate(llm_nlwp_total[5m])",
+          "legendFormat": "{{collector}} - NLWP Rate",
+          "refId": "A"
+        }
+      ],
+      "title": "NLWP Usage Rate (Tokens/Weight)",
+      "type": "timeseries"
+    },
+    {
       "gridPos": { "format": "row", "h": 1, "w": 24, "x": 0, "y": 9 },
       "id": 4,
       "title": "🐹 Go Runtime Performance",
@@ -151,6 +165,82 @@
         }
       ],
       "title": "Process Resident Memory",
+      "type": "timeseries"
+    },
+    {
+      "gridPos": { "format": "row", "h": 1, "w": 24, "x": 0, "y": 27 },
+      "id": 12,
+      "title": "🐳 Ollama GPU & Model Metrics",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "gridPos": { "h": 8, "w": 6, "x": 0, "y": 28 },
+      "id": 13,
+      "targets": [
+        {
+          "expr": "ollama_gpu_utilization_percent",
+          "legendFormat": "GPU Util",
+          "refId": "A"
+        }
+      ],
+      "title": "GPU Utilization (%)",
+      "type": "gauge"
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "gridPos": { "h": 8, "w": 6, "x": 6, "y": 28 },
+      "id": 14,
+      "targets": [
+        {
+          "expr": "ollama_gpu_temperature_celsius",
+          "legendFormat": "GPU Temp",
+          "refId": "A"
+        }
+      ],
+      "title": "GPU Temperature (°C)",
+      "type": "gauge"
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "gridPos": { "h": 8, "w": 6, "x": 12, "y": 28 },
+      "id": 15,
+      "targets": [
+        {
+          "expr": "(ollama_gpu_vram_used_bytes / ollama_gpu_vram_total_bytes) * 100",
+          "legendFormat": "VRAM Usage",
+          "refId": "A"
+        }
+      ],
+      "title": "VRAM Utilization (%)",
+      "type": "gauge"
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "gridPos": { "h": 8, "w": 6, "x": 18, "y": 28 },
+      "id": 16,
+      "targets": [
+        {
+          "expr": "ollama_up",
+          "legendFormat": "Status",
+          "refId": "A"
+        }
+      ],
+      "title": "Ollama Status",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus" },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 36 },
+      "id": 17,
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(ollama_request_duration_seconds_bucket[5m])))",
+          "legendFormat": "p95 Latency",
+          "refId": "A"
+        }
+      ],
+      "title": "Request Latency p95 (sec)",
       "type": "timeseries"
     }
   ],

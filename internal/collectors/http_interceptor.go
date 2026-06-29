@@ -27,6 +27,7 @@ func (h *HTTPInterceptor) Collect() error {
 	tokenType := "completion" // placeholder
 
 	exporter.UpdateTokenUsage(h.name, tokenType, tokensUsed)
+	exporter.UpdateNLWP(h.name, float64(rand.Intn(10)+1))
 	fmt.Printf("[Collector: %s] Detected %f tokens used\n", h.name, tokensUsed)
 
 	return nil
